@@ -1,0 +1,18 @@
+{% extends "layout.html" %}
+{% load static %}
+
+{% block title %}
+    NEMO->CHECKOUT
+{% endblock %}
+
+
+{% block content %}
+<div class="container text-center mt-5 bg-success text-white p-4 rounded">
+
+    <h2><i class="fas fa-check-circle"></i> Order Placed Successfully!</h2>
+    <p class="text-white">Your Order ID: {{ order_id }}</p>
+    <p class="text-white">A confirmation email has been sent to <strong>{{ user_email }}</strong>.</p>
+    <a href="{% url 'Products' %}" class="btn btn-outline-light">Continue Shopping</a>
+
+</div>
+{% endblock %}

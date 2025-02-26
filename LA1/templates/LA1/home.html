@@ -1,0 +1,47 @@
+{% extends "layout.html" %}
+{% load socialaccount %}
+{% block title %}
+    NEMO 
+{% endblock %}
+
+{% block content %}
+    <div class="text-light container" style="padding-top: 70px;">
+        <div class="hero bg-primary text-white text-center p-5">
+            <h1>Welcome to NEMO</h1>
+            <p>Your one-stop solution for managing your market.</p>
+            {%if user.is_authenticated%}
+            <h3>Hello! <strong>{{user_name}}</strong></h3>
+            {%endif%}
+            <a class="btn btn-light btn-lg {% if request.path == '/Products/' %}active{% endif %}" href="{% provider_login_url 'google' %}?next=/Products/ ">Get Started</a>
+        </div>
+        <div class="row">
+            <div class="col-12">
+                <h1 class="mt-4">Featured Products</h1>
+                <p>
+                    NEMO is a web application that allows users to create, edit, and delete notes. 
+                    It is built using Django, a high-level Python web framework.
+                </p>
+            </div>
+        </div>
+    </div>
+    <div class="container mt-4">
+        <h2 class="text-center">Featured Products</h2>
+        <div class="row mt-4">
+            {% for product in products|slice:":4" %}
+            <div class="col-md-3 mb-4">
+                    <div class="card shadow-sm">
+                    <img src="{{ product.image_url }}" class="card-img-top" alt="{{ product.name }}">
+                    <div class="card-body">
+                        <h5 class="card-title text-center">{{ product.name }}</h5>
+
+                        <p class="card-text text-center">{{ product.description }}</p>
+
+                        <p class="card-text text-center"><strong>${{ product.price }}</strong></p>
+
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+{% endblock %}

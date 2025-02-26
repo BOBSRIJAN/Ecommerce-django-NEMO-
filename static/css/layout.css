@@ -1,0 +1,162 @@
+body {
+  padding-top: 70px; /* Adjust based on navbar height */
+}
+/* Fade-in animation for dropdown */
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+      transform: translateY(10px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(5);
+    }
+  }
+
+/* Add hover effect for dropdown items */
+.dropdown-item:hover {
+background-color: #f8f9fa;
+color: #212529;
+transform: translateX(15px);
+}
+
+/* Style the dropdown */
+.dropdown-menu {
+border-radius: 1rem;
+padding: 0.5rem 0;
+}
+
+/* Style buttons */
+.btn-outline-light {
+border: 2px solid #ff0000;
+}
+
+.btn-outline-light:hover {
+background-color: #ffffff;
+color: #000000;
+}
+
+/* Add soft shadows to buttons and dropdown */
+.btn, .dropdown-menu {
+box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+.home-ani:hover {
+  transform: scale(1.2); /* Slightly enlarge on hover */
+  }
+
+/* Color-changing animation for the NEMO text */
+.nemo-animation {
+font-weight: bold;
+font-size: 1.5rem; /* Adjust the size as needed */
+animation: colorChange 10s infinite;
+transition: transform 0.5s ease-in-out;
+}
+
+.nemo-animation:hover {
+transform: scale(1.2); /* Slightly enlarge on hover */
+}
+
+@keyframes colorChange {
+  0% {
+    color: #4963ca; /* Blue */
+  }
+  10% {
+    color: #51eaac; /* Teal */
+  }
+  20% {
+    color: #c9f2e1; /* Light Green */
+  }
+  30% {
+    color: #7ed7f7; /* Sky Blue */
+  }
+  40% {
+    color: #ff7eb3; /* Pink */
+  }
+  50% {
+    color: #ffae42; /* Orange */
+  }
+  60% {
+    color: #ff4d4d; /* Red */
+  }
+  70% {
+    color: #a64dff; /* Purple */
+  }
+  80% {
+    color: #ffccff; /* Light Pink */
+  }
+  90% {
+    color: #00ffaa; /* Neon Green */
+  }
+  100% {
+    color: #4963ca; /* Back to Blue */
+  }
+}
+
+
+footer {
+  background-color: #333;
+  color: #fff;
+  text-align: center;
+  padding: 5px 0;
+}
+
+.product-container {
+  max-height: 500px; /* Adjust the height as needed */
+  overflow-y: auto;
+  padding: 10px;
+}
+
+/* Scrollable product section */
+.product-container {
+  max-height: calc(100vh - 150px); /* Adjust height dynamically */
+  overflow-y: auto;
+  padding: 10px;
+}
+
+/* Fixed cart section at the bottom */
+.cart-container {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  background: rgba(0, 0, 0, 0.8); /* Semi-transparent background */
+  color: white;
+  padding: 15px;
+  text-align: center;
+  box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.2); /* Shadow effect for depth */
+}
+
+/* Make cart content look good */
+.cart-container h3 {
+  margin-bottom: 10px;
+}
+
+.checkout-btn {
+  width: 100%; /* Full-width button */
+  max-width: 300px; /* Limit button width */
+}
+
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: #f1f1f1; 
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(45deg, #1e1053, #9b0f27);
+  border-radius: 10px;
+  animation: pulse 2s infinite alternate;
+}
+
+@keyframes pulse {
+  0% {
+    background: linear-gradient(45deg, #ff7eb3, #0aa94f);
+  }
+  100% {
+    background: linear-gradient(45deg, #c8ff5a, #9c8d90);
+  }
+}

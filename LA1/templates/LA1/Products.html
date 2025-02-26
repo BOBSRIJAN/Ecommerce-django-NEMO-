@@ -1,0 +1,103 @@
+{% extends "layout.html" %}
+{% load static %}
+{% block title %}
+    NEMO->PRODUCTS
+{% endblock %}
+
+{% block content %}
+<div class="text-light container-fluid mt-4">
+
+    <div class="row">
+        <div class="col-12">
+            <h1>Our Products</h1>
+            <p>Logged in as <strong>{{ user_name }}</strong></p>
+        </div>
+    </div>
+
+    <!-- Scrollable product section -->
+    <div class="row product-container">
+        {% for product in products %}
+            <div class="col-lg-4 col-md-6 col-sm-12 mb-4 shadow-sm">
+
+                <div class="card product-card shadow">
+
+                <img src="{{ product.image_url }}" class="card-img-top img-fluid" alt="{{ product.name }}">
+                <div class="card-body">
+                    <h5 class="card-title text-center">{{ product.name }}</h5>
+
+                    <p class="card-text text-center">{{ product.description }}</p>
+
+                    <p class="price">${{ product.price }}</p>
+    
+                    <div class="quantity-selector">
+                        <label for="quantity-{{ product.id }}">Quantity:</label>
+                        <input type="number" id="quantity-{{ product.id }}" name="quantity" min="1" value="1" class="form-control">
+                    </div>
+
+                    <!-- 🛒 Add to Cart Button (AJAX) -->
+                    <button class="btn btn-outline-primary add-to-cart" data-product-id="{{ product.id }}">Add to Cart</button>
+
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+<a href="{% url 'cart_view' %}" class="cart-icon">
+    🛒
+</a>
+
+<!-- 🛒 JavaScript to Handle AJAX Add to Cart -->
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        document.querySelectorAll(".add-to-cart").forEach(button => {
+            button.addEventListener("click", function() {
+                let productId = this.getAttribute("data-product-id");  
+                let quantity = document.getElementById(`quantity-${productId}`).value;
+    
+                fetch(`/add_to_cart/${productId}/`, {  // ✅ Ensure Correct URL
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json",
+                        "X-CSRFToken": "{{ csrf_token }}"
+                    },
+                    body: JSON.stringify({ quantity: quantity })
+                })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.status === "success") {
+                        alert("Item added to cart!");
+                    } else {
+                        alert("Error: " + data.message);
+                    }
+                })
+                .catch(error => console.error("Error:", error));
+            });
+        });
+    });
+</script>
+
+<style>
+    /* Floating Cart Icon */
+    .cart-icon {
+        position: fixed;
+        bottom: 20px;
+        right: 20px;
+        background: #ffcc00;
+        color: #000;
+        font-size: 24px;
+        width: 50px;
+        height: 50px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 50%;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        text-decoration: none;
+    }
+
+    .cart-icon:hover {
+        background: #ffaa00;
+    }
+</style>
+{% endblock %}
