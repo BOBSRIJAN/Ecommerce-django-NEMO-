@@ -5,6 +5,7 @@ from pymongo import MongoClient
 from django.contrib.auth.decorators import login_required
 import json
 from bson import ObjectId
+import datetime
 
 # Connect to MongoDB
 client = MongoClient('mongodb+srv://srijan:1234@cluster0.yrnd8.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0')
@@ -89,8 +90,7 @@ def checkout(request):
         if not cart:
             return render(request, 'LA1/cart.html', {'error': 'Cart is empty!'})  # Prevent checkout if cart is empty
 
-        # Create order data
-        order = {'user_id': user_id, 'items': cart, 'status': 'pending','user_email': user_email}
+        order = {'user_id': user_id, 'items': cart, 'status': 'pending','user_email': user_email, 'created_add_date': datetime.datetime.now()} 
         order_id = orders_collection.insert_one(order).inserted_id  # Save order to MongoDB
 
         # Clear the cart after checkout
