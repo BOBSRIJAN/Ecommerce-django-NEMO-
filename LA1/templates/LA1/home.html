@@ -12,14 +12,19 @@
             {%if user.is_authenticated%}
             <h3>Hello! <strong>{{user_name}}</strong></h3>
             {%endif%}
+            {%if user.is_authenticated%}
+            <a class="btn btn-light btn-lg" href="{% url 'Products' %}">Get Started</a>
+            {%else%}
             <a class="btn btn-light btn-lg {% if request.path == '/Products/' %}active{% endif %}" href="{% provider_login_url 'google' %}?next=/Products/ ">Get Started</a>
+            {%endif%}
         </div>
         <div class="row">
             <div class="col-12">
                 <h1 class="mt-4">Featured Products</h1>
                 <p>
-                    NEMO is a web application that allows users to create, edit, and delete notes. 
-                    It is built using Django, a high-level Python web framework.
+                    NEMO is an online shopping platform that allows users to browse, purchase, 
+                    and manage a variety of fresh fruits. Built using Django, a high-level Python web framework, 
+                    NEMO ensures a seamless and user-friendly shopping experience with secure transactions and a smooth cart management system.
                 </p>
             </div>
         </div>

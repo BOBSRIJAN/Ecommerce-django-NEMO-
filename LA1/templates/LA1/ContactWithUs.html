@@ -1,0 +1,117 @@
+{% extends "layout.html" %}
+{% block title %}NEMO -> Contact with us {% endblock %}
+
+{% block content %}
+<style>
+    body {
+        background: linear-gradient(to right, #ffafbd, #ffc3a0);
+        font-family: "Poppins", sans-serif;
+        text-align: center;
+        color: white;
+        overflow: hidden;
+    }
+
+    .coming-soon-container {
+        height: 100vh;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+
+    h1 {
+        font-size: 3.5rem;
+        font-weight: bold;
+        animation: fadeInDown 1.5s ease-in-out;
+    }
+
+    p {
+        font-size: 1.5rem;
+        animation: fadeInUp 2s ease-in-out;
+    }
+
+    .countdown {
+        font-size: 2rem;
+        font-weight: bold;
+        margin-top: 20px;
+    }
+
+    .btn-home {
+        margin-top: 20px;
+        padding: 10px 20px;
+        font-size: 1.2rem;
+        background-color: white;
+        color: #ff6f61;
+        border: none;
+        border-radius: 30px;
+        text-decoration: none;
+        transition: all 0.3s ease-in-out;
+    }
+
+    .btn-home:hover {
+        background-color: #ff6f61;
+        color: white;
+        transform: scale(1.1);
+    }
+
+    @keyframes fadeInDown {
+        from {
+            opacity: 0;
+            transform: translateY(-30px);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+
+    @keyframes fadeInUp {
+        from {
+            opacity: 0;
+            transform: translateY(30px);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+</style>
+
+<div class="coming-soon-container">
+    <h1>🚀 Exciting Things Are Coming Soon! 🚀</h1>
+    <p>We're working hard to bring you the best online fruit shopping experience.</p>
+
+    <div class="countdown" id="countdown"></div>
+
+    <a href="{% url 'Home' %}" class="btn-home">🏠 Back to Home</a>
+</div>
+
+<script>
+    function countdownTimer() {
+        let launchDate = new Date();
+        launchDate.setDate(launchDate.getDate() + 7); // Set launch date 7 days from today
+
+        function updateCountdown() {
+            let now = new Date().getTime();
+            let timeLeft = launchDate - now;
+
+            let days = Math.floor(timeLeft / (1000 * 60 * 60 * 24));
+            let hours = Math.floor((timeLeft % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            let minutes = Math.floor((timeLeft % (1000 * 60 * 60)) / (1000 * 60));
+            let seconds = Math.floor((timeLeft % (1000 * 60)) / 1000);
+
+            document.getElementById("countdown").innerHTML =
+                `🕒 Launching in ${days}d ${hours}h ${minutes}m ${seconds}s`;
+
+            if (timeLeft < 0) {
+                document.getElementById("countdown").innerHTML = "🎉 We are live now!";
+            }
+        }
+
+        setInterval(updateCountdown, 1000);
+    }
+
+    countdownTimer();
+</script>
+
+{% endblock %}
